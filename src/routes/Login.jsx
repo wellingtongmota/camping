@@ -15,18 +15,26 @@ import {
   Stack
 } from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik"
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { LuLock, LuUser } from "react-icons/lu";
 import { BsCapslock } from "react-icons/bs";
-import { insertUser } from "../firebase/controllers/userController";
+import { Navigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Login = () => {
 
   const [capsLockOn, setCapsLockOn] = useState(false);
+  const { authenticated, signIn } = useContext(AuthContext)
 
   const handleKeyUp = e => {
     const capsLockIsOn = e.getModifierState('CapsLock');
     setCapsLockOn(capsLockIsOn);
+  }
+
+  if (authenticated) {
+    return (
+      <Navigate to='/camping-fonte/admin' />
+    )
   }
 
   return (
@@ -37,15 +45,8 @@ const Login = () => {
         checked: []
       }}
 
-      // onSubmit={(values, { setSubmitting }) => {
-      //   setTimeout(() => {
-      //     alert(JSON.stringify(values, null, 2));
-      //     setSubmitting(false);
-      //   }, 400);
-      // }}
-
       onSubmit={async (values) => {
-        await insertUser(values)
+        await signIn(values)
       }}
     >
       {({ isSubmitting }) => (
@@ -99,13 +100,12 @@ const Login = () => {
                       focusBorderColor='teal.400'
                       onKeyDownCapture={handleKeyUp}
                     />
-                    {capsLockOn && (
+                    {capsLockOn &&
                       <InputRightElement>
                         <BsCapslock color='gray' />
                       </InputRightElement>
-                    )}
+                    }
                   </InputGroup>
-                  {/* {message && <Text mt={1} fontStyle='italic' color='red.500'>{message}</Text>} */}
                 </FormControl>
 
                 <Field as={Checkbox} name="checked" value="remember" colorScheme='teal'>

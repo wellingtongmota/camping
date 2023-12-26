@@ -2,27 +2,25 @@ import { Flex } from "@chakra-ui/react"
 import { Outlet } from "react-router-dom"
 import Navbar from "./components/navbar/Navbar"
 import Footer from "./components/footer/Footer"
+import AuthProvider from "./contexts/AuthContext"
 
 const App = () => {
   return (
-    <Flex
-      flexDirection='column'
-      align='center'
-      w='full'
-      h='100dvh'
-      overflowY='auto'
-    >
-      <Navbar />
-
+    <AuthProvider>
       <Flex
+        flexDirection='column'
+        align='center'
         w='full'
-        flex={1}
+        h='100dvh'
+        overflowY='auto'
       >
-        <Outlet />
+        <Navbar />
+        <Flex w='full' flex={1}>
+          <Outlet />
+        </Flex>
+        <Footer />
       </Flex>
-
-      <Footer />
-    </Flex>
+    </AuthProvider>
   )
 }
 
