@@ -1,6 +1,7 @@
 import { Flex } from "@chakra-ui/react"
 import { Outlet } from "react-router-dom"
 import Navbar from "./components/navbar/Navbar"
+import Footer from "./components/footer/Footer"
 
 const App = () => {
   return (
@@ -12,7 +13,14 @@ const App = () => {
       overflowY='auto'
     >
       <Navbar />
-      <Outlet />
+
+      <Flex
+        flex={1}
+      >
+        <Outlet />
+      </Flex>
+
+      <Footer />
     </Flex>
   )
 }
