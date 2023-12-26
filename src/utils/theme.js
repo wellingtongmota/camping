@@ -9,7 +9,8 @@ const theme = extendTheme({
     Heading: {
       // 1. We can update the base styles
       baseStyle: {
-        letterSpacing: '0.15rem'
+        letterSpacing: '0.15rem',
+        color: 'gray.700'
       },
     },
     Text: {

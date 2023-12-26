@@ -15,6 +15,7 @@ const App = () => {
       <Navbar />
 
       <Flex
+        w='full'
         flex={1}
       >
         <Outlet />
