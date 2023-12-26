@@ -39,7 +39,7 @@ const Navbar = () => {
           as={RouterLink}
           to='/camping-fonte/login'
         >
-          <Icon as={LuUser2} boxSize={8} color='whiteAlpha.700' />
+          <Icon ml={5} as={LuUser2} boxSize={8} color='whiteAlpha.700' />
         </Link>
       </Flex>
     </Flex>
