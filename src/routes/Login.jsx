@@ -59,7 +59,7 @@ const Login = () => {
             borderRadius='none'
           >
             <CardHeader>
-              <Heading>Login</Heading>
+              <Heading color='gray.700'>Login</Heading>
             </CardHeader>
 
             <CardBody>
