@@ -18,6 +18,7 @@ import { Field, Form, Formik } from "formik"
 import { useState } from "react";
 import { LuLock, LuUser } from "react-icons/lu";
 import { BsCapslock } from "react-icons/bs";
+import { insertUser } from "../firebase/controllers/userController";
 
 const Login = () => {
 
@@ -36,11 +37,15 @@ const Login = () => {
         checked: []
       }}
 
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+      // onSubmit={(values, { setSubmitting }) => {
+      //   setTimeout(() => {
+      //     alert(JSON.stringify(values, null, 2));
+      //     setSubmitting(false);
+      //   }, 400);
+      // }}
+
+      onSubmit={async (values) => {
+        await insertUser(values)
       }}
     >
       {({ isSubmitting }) => (
