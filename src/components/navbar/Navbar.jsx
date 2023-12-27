@@ -1,6 +1,6 @@
-import { Avatar, Flex, Icon, Image, Link } from '@chakra-ui/react'
+import { Avatar, Flex, Icon, IconButton, Image, Link, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 import { NavLink as RouterLink } from 'react-router-dom'
-import { LuFacebook, LuInstagram } from "react-icons/lu";
+import { LuFacebook, LuInstagram, LuLayoutDashboard, LuLogIn, LuLogOut, LuMenu } from "react-icons/lu";
 import logo from '/logo.png'
 import NavLink from './NavLink'
 import { useContext } from 'react';
@@ -22,7 +22,7 @@ const Navbar = () => {
       px={[2, 4, 6]}
       py={2}
       gap={2}
-      textTransform='uppercase'
+      // textTransform='uppercase'
     >
       <Flex gap={4} align='center'>
         <Link as={RouterLink} to='/camping-fonte'>
@@ -41,18 +41,39 @@ const Navbar = () => {
         <Link href='https://www.instagram.com/atitudepinda' isExternal ><Icon as={LuInstagram} boxSize={8} color='whiteAlpha.700' /></Link>
         <Link href='https://www.facebook.com/atitudepinda' isExternal ><Icon as={LuFacebook} boxSize={8} color='whiteAlpha.700' /></Link>
 
-        {!authenticated ?
-          <Link
-            as={RouterLink}
-            to='/camping-fonte/login'
-          >
-            {/* <Icon ml={5} as={LuUser2} boxSize={8} onClick={signIn} color='whiteAlpha.700' /> */}
-            <Avatar size='sm' colorScheme='gray' onClick={signIn} />
-          </Link>  
-          :
-          // <Text ml={5} color='whiteAlpha.700' onClick={signOut}>SAIR</Text>
-          <Avatar size='sm' colorScheme='gray' name={user} onClick={signOut} />
-      }
+        <Menu>
+          {!authenticated ?
+            <MenuButton
+              as={IconButton}
+              aria-label='Options'
+              icon={<LuMenu />}
+              variant='link'
+              color='whiteAlpha.700'
+              fontSize='3xl'
+              ml={4}
+              _active={{ color: 'whiteAlpha.800' }}
+            />
+            :
+            <Avatar ml={4} size='sm' as={MenuButton} name={user} />
+          }
+          {!authenticated ?
+            <MenuList color='gray.700'>
+              <MenuItem icon={<LuLogIn />} onClick={signIn} as={RouterLink} to='/camping-fonte/login'>
+                Entrar
+              </MenuItem>
+            </MenuList>
+            :
+            <MenuList color='gray.700'>
+              <MenuItem icon={<LuLayoutDashboard />} as={RouterLink} to='/camping-fonte/admin'>
+                Admin
+              </MenuItem>
+              <MenuItem icon={<LuLogOut />} onClick={signOut} as={RouterLink} to='/camping-fonte'>
+                Sair
+              </MenuItem>
+            </MenuList>
+          }
+        </Menu>
+
       </Flex>
     </Flex>
   )
