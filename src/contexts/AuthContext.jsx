@@ -11,9 +11,8 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const loadingStorage = () => {
       const storageUser = localStorage.getItem("@Auth:user")
-      const storageToken = localStorage.getItem("@Auth:token")
 
-      if (storageUser && storageToken) {
+      if (storageUser) {
         setUser(storageUser)
         setAuthenticated(true)
       }
@@ -21,9 +20,8 @@ const AuthProvider = ({ children }) => {
 
     const loadingSession = () => {
       const sessionUser = sessionStorage.getItem("@Auth:user")
-      const sessionToken = sessionStorage.getItem("@Auth:token")
 
-      if (sessionUser && sessionToken) {
+      if (sessionUser) {
         setUser(sessionUser)
         setAuthenticated(true)
       }
@@ -39,27 +37,26 @@ const AuthProvider = ({ children }) => {
     try {
       const data = await userAuthenticate(values)
 
-      if (data[0] == undefined) {
-        console.log('user not found')
+      if (data[0] == undefined)
+        throw 'user not found'
+
+      const { user } = data[0]
+      setUser(user)
+
+      if (values.checked[0] === "remember") {
+        localStorage.setItem("@Auth:user", user)
+        setAuthenticated(true)
       } else {
-        const { user } = data[0]
-        setUser(user)
-
-        if (values.checked[0] === "remember") {
-          localStorage.setItem("@Auth:user", user)
-          setAuthenticated(true)
-        } else {
-          setAuthenticated(true)
-          sessionStorage.setItem("@Auth:user", user)
-        }
+        setAuthenticated(true)
+        sessionStorage.setItem("@Auth:user", user)
       }
-
     } catch (err) {
       console.log("Erro: ", err)
     }
   }
 
   const signOut = () => {
+    console.log('signOut')
     setUser(null)
     setAuthenticated(false)
     localStorage.clear()

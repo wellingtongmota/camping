@@ -1,10 +1,15 @@
-import { Flex, Icon, Image, Link } from '@chakra-ui/react'
+import { Avatar, Flex, Icon, Image, Link } from '@chakra-ui/react'
 import { NavLink as RouterLink } from 'react-router-dom'
-import { LuFacebook, LuInstagram, LuUser2 } from "react-icons/lu";
+import { LuFacebook, LuInstagram } from "react-icons/lu";
 import logo from '/logo.png'
 import NavLink from './NavLink'
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const Navbar = () => {
+
+  const { authenticated, user, signIn, signOut } = useContext(AuthContext)
+
   return (
     <Flex
       w='full'
@@ -35,12 +40,19 @@ const Navbar = () => {
       <Flex gap={4} align='center'>
         <Link href='https://www.instagram.com/atitudepinda' isExternal ><Icon as={LuInstagram} boxSize={8} color='whiteAlpha.700' /></Link>
         <Link href='https://www.facebook.com/atitudepinda' isExternal ><Icon as={LuFacebook} boxSize={8} color='whiteAlpha.700' /></Link>
-        <Link
-          as={RouterLink}
-          to='/camping-fonte/login'
-        >
-          <Icon ml={5} as={LuUser2} boxSize={8} color='whiteAlpha.700' />
-        </Link>
+
+        {!authenticated ?
+          <Link
+            as={RouterLink}
+            to='/camping-fonte/login'
+          >
+            {/* <Icon ml={5} as={LuUser2} boxSize={8} onClick={signIn} color='whiteAlpha.700' /> */}
+            <Avatar size='sm' colorScheme='gray' onClick={signIn} />
+          </Link>  
+          :
+          // <Text ml={5} color='whiteAlpha.700' onClick={signOut}>SAIR</Text>
+          <Avatar size='sm' colorScheme='gray' name={user} onClick={signOut} />
+      }
       </Flex>
     </Flex>
   )

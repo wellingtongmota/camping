@@ -7,11 +7,13 @@ import theme from './utils/theme.js'
 import Home from './routes/Home.jsx'
 import Admin from './routes/Admin.jsx'
 import Login from './routes/Login.jsx'
+import ErrorPage from './routes/ErrorPage.jsx'
 
 const router = createBrowserRouter([
   {
     path: '/camping-fonte',
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       { path: '/camping-fonte', element: <Home /> },
       { path: '/camping-fonte/admin', element: <Admin /> },
