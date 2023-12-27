@@ -1,4 +1,4 @@
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 
 export const newSubscription = async (values) => {
@@ -19,4 +19,16 @@ export const newSubscription = async (values) => {
   } catch (e) {
     console.error("Error adding document: ", e);
   }
+}
+
+export const getAll = async () => {
+  const querySnapshot = await getDocs(collection(db, "subscriptions"));
+  let data = []
+  querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    data.push(doc.data())
+  });
+
+  // console.log(data)
+  return data
 }
