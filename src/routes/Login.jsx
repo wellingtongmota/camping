@@ -64,8 +64,9 @@ const Login = () => {
             overflowY='auto'
             borderRadius='none'
           >
-            <CardHeader>
+            <CardHeader as={Flex} alignItems='baseline' gap={2}>
               <Heading color='gray.700'>Login</Heading>
+              <span>adm</span>
             </CardHeader>
 
             <CardBody>
