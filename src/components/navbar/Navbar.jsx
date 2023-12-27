@@ -16,7 +16,7 @@ const Navbar = () => {
       h='4.5rem'
       bg='teal.900'
       textColor='whiteAlpha.900'
-      boxShadow='lg'
+      boxShadow='md'
       align='center'
       justify='space-between'
       px={[2, 4, 6]}
@@ -54,7 +54,7 @@ const Navbar = () => {
               _active={{ color: 'whiteAlpha.800' }}
             />
             :
-            <Avatar ml={4} size='sm' as={MenuButton} name={user} />
+            <Avatar size='sm' as={MenuButton} name={user} />
           }
           {!authenticated ?
             <MenuList color='gray.700'>
