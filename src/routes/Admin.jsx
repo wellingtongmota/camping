@@ -1,5 +1,5 @@
 import { Button, Flex, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../contexts/AuthContext"
 import { Navigate } from "react-router-dom"
 import { getAll } from "../firebase/controllers/subscriptionController"
@@ -8,6 +8,14 @@ const Admin = () => {
 
   const { authenticated } = useContext(AuthContext)
   const [subscriptions, setSubscriptions] = useState([]);
+
+  useEffect(() => {
+    getAll()
+      .then(data => {
+        setSubscriptions(data)
+      })
+      .catch(e => console.log('Erro: ', e))
+  }, [])
 
   if (!authenticated) {
     return (
@@ -19,7 +27,6 @@ const Admin = () => {
     await getAll()
       .then(data => {
         setSubscriptions(data)
-        console.log(subscriptions)
       })
       .catch(e => console.log('Erro: ', e))
   }
@@ -37,7 +44,7 @@ const Admin = () => {
         maxW='6xl'
         // flex={1}
         align='center'
-        // border='1px solid'
+      // border='1px solid'
       >
 
         <Button
