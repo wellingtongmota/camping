@@ -1,4 +1,4 @@
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "../firebase";
 
 export const newSubscription = async (values) => {
@@ -22,13 +22,29 @@ export const newSubscription = async (values) => {
 }
 
 export const getAll = async () => {
-  const querySnapshot = await getDocs(collection(db, "subscriptions"));
-  let data = []
-  querySnapshot.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
-    data.push(doc.data())
-  });
+  try {
+    const subscriptionsRef = collection(db, "subscriptions");
+    let data = []
 
-  // console.log(data)
-  return data
+    const q = query(subscriptionsRef, orderBy("name"));
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      data.push(doc.data())
+    })
+
+    if (querySnapshot.empty)
+      throw {
+        title: 'Erro',
+        description: 'Inscrição não encontrada.'
+      }
+    else {
+      console.log(JSON.stringify(data))
+      return data
+    }
+
+  } catch (error) {
+    console.log(JSON.stringify(error))
+    return error
+  }
 }

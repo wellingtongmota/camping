@@ -23,14 +23,13 @@ export const getUsers = async () => {
 }
 
 export const userAuthenticate = async (values) => {
-
   try {
     const { user, password } = values
-    const citiesRef = collection(db, "users");
+    const usersRef = collection(db, "users");
     let data = []
 
     // Create a query against the collection.
-    const q = query(citiesRef, where("user", "==", user), where("password", "==", password));
+    const q = query(usersRef, where("user", "==", user), where("password", "==", password));
 
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
@@ -53,6 +52,4 @@ export const userAuthenticate = async (values) => {
     // console.log(JSON.stringify(error))
     return error
   }
-
-  
 }
