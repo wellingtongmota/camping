@@ -81,11 +81,12 @@ const SubscribeModal = (props) => {
 
       validationSchema={subscribeSchema}
 
-      onSubmit={async (values) => {
+      onSubmit={async (values, {resetForm}) => {
         await newSubscription(values)
           .then(() => {
             // message server
             messageServer(true)
+            resetForm()
             onClose()
           })
           .catch(e => {
