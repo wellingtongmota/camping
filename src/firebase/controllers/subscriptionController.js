@@ -10,7 +10,7 @@ export const getAll = async () => {
 
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      data.push(Object.assign({id: doc.id }, doc.data()))
+      data.push(Object.assign({ id: doc.id }, doc.data()))
     })
 
     if (querySnapshot.empty)
@@ -49,5 +49,13 @@ export const newSubscription = async (values) => {
 
 export const deleteSubscription = async (values) => {
   const { id } = values
-  await deleteDoc(doc(db, "subscriptions", `${id}`));
+  await deleteDoc(doc(db, "subscriptions", `${id}`))
+    .then(response => {
+      console.log('delete ok. ', response)
+      return true
+    })
+    .catch(e => {
+      console.log('error delete. ', e)
+      return false
+    })
 }

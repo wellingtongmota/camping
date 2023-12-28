@@ -18,7 +18,6 @@ import {
 } from '@chakra-ui/react'
 import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
-// import emailjs from '@emailjs/browser'
 import SubscribeInput from './SubscribeInput'
 import SubscribeRadio from './SubscribeRadio'
 import { newSubscription } from '../../firebase/controllers/subscriptionController'
@@ -81,7 +80,7 @@ const SubscribeModal = (props) => {
 
       validationSchema={subscribeSchema}
 
-      onSubmit={async (values, {resetForm}) => {
+      onSubmit={async (values, { resetForm }) => {
         await newSubscription(values)
           .then(() => {
             // message server

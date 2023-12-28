@@ -1,5 +1,5 @@
-import { Button, Flex, Icon, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
 import { useContext, useEffect, useState } from "react"
+import { Button, Flex, Icon, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
 import { LuTrash2 } from "react-icons/lu";
 import { AuthContext } from "../contexts/AuthContext"
 import { Navigate } from "react-router-dom"
@@ -45,15 +45,11 @@ const Admin = () => {
         flexDirection='column'
         w='full'
         maxW='9xl'
-        // flex={1}
         align='center'
-      // border='1px solid'
       >
 
         <Button
-          // type='submit'
           colorScheme='teal'
-          // isLoading={isSubmitting}
           loadingText='Atualizando'
           onClick={getSubscriptions}
         >
@@ -78,8 +74,8 @@ const Admin = () => {
             <Tbody>
               {subscriptions.length !== 0 &&
 
-                subscriptions.map((sub, index) => (
-                  <Tr key={index} _hover={{ backgroundColor: 'gray.200' }}>
+                subscriptions.map(sub => (
+                  <Tr key={sub.id} _hover={{ backgroundColor: 'gray.200' }}>
                     <Td>{sub.name}</Td>
                     <Td>{sub.email}</Td>
                     <Td>{sub.phone}</Td>
