@@ -1,8 +1,10 @@
-import { Button, Flex, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
+import { Button, Flex, Icon, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
 import { useContext, useEffect, useState } from "react"
+import { LuTrash2 } from "react-icons/lu";
 import { AuthContext } from "../contexts/AuthContext"
 import { Navigate } from "react-router-dom"
 import { getAll } from "../firebase/controllers/subscriptionController"
+import DeleteModal from "../components/DeleteModal";
 
 const Admin = () => {
 
@@ -37,11 +39,12 @@ const Admin = () => {
       w='full'
       align='center'
       p={2}
+      bg='gray.50'
     >
       <Flex
         flexDirection='column'
         w='full'
-        maxW='6xl'
+        maxW='9xl'
         // flex={1}
         align='center'
       // border='1px solid'
@@ -57,7 +60,7 @@ const Admin = () => {
           Atualizar
         </Button>
 
-        <TableContainer mt={8}>
+        <TableContainer mt={8} bg='white'>
           <Table variant='simple' size='sm'>
             {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
             <Thead>
@@ -69,6 +72,7 @@ const Admin = () => {
                 <Th>Cama / Barraca</Th>
                 <Th>Transporte</Th>
                 <Th>Met. pagamento</Th>
+                <Th isNumeric pl={8}>Ações</Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -82,6 +86,13 @@ const Admin = () => {
                     <Td>{sub.ground}</Td>
                     <Td>{sub.transport}</Td>
                     <Td>{sub.payment}</Td>
+                    <Td textAlign='end'>
+                      <Flex gap={2} justify='end'>
+                        <DeleteModal placeholder={"Deletar inscrição de: " + sub.name} onDeleteItem={() => console.log('delete ', sub.name)}>
+                          <Icon as={LuTrash2} cursor='pointer' color='red.600' boxSize={5} />
+                        </DeleteModal>
+                      </Flex>
+                    </Td>
                   </Tr>
                 ))
               }
