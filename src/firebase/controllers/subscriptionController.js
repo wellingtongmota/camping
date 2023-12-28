@@ -1,8 +1,33 @@
-import { collection, addDoc, getDocs, query, orderBy } from "firebase/firestore";
+import { collection, addDoc, getDocs, query, orderBy, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
 
-export const newSubscription = async (values) => {
+export const getAll = async () => {
+  try {
+    const subscriptionsRef = collection(db, "subscriptions");
+    let data = []
 
+    const q = query(subscriptionsRef, orderBy("name"));
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      data.push(Object.assign({id: doc.id }, doc.data()))
+    })
+
+    if (querySnapshot.empty)
+      throw {
+        title: 'Erro',
+        description: 'Inscrição não encontrada.'
+      }
+    else {
+      return data
+    }
+
+  } catch (error) {
+    return error
+  }
+}
+
+export const newSubscription = async (values) => {
   const { name, email, phone, church, ground, transport, payment } = values
 
   try {
@@ -21,28 +46,7 @@ export const newSubscription = async (values) => {
   }
 }
 
-export const getAll = async () => {
-  try {
-    const subscriptionsRef = collection(db, "subscriptions");
-    let data = []
-
-    const q = query(subscriptionsRef, orderBy("name"));
-
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      data.push(doc.data())
-    })
-
-    if (querySnapshot.empty)
-      throw {
-        title: 'Erro',
-        description: 'Inscrição não encontrada.'
-      }
-    else {
-      return data
-    }
-
-  } catch (error) {
-    return error
-  }
+export const deleteSubscription = async (values) => {
+  const { id } = values
+  await deleteDoc(doc(db, "subscriptions", `${id}`));
 }
