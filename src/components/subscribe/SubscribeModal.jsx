@@ -14,6 +14,7 @@ import {
   RadioGroup,
   Stack,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react'
 import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
@@ -25,31 +26,31 @@ import { newSubscription } from '../../firebase/controllers/subscriptionControll
 const SubscribeModal = (props) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
-  // const toast = useToast()
+  const toast = useToast()
 
-  // const messageServer = (response) => {
-  //   if (response.status === 200) {
-  //     toast({
-  //       title: 'Sucesso',
-  //       description: `Dados enviados!`,
-  //       status: 'success',
-  //       position: 'bottom',
-  //       variant: 'subtle',
-  //       duration: 5000,
-  //       isClosable: true,
-  //     })
-  //   } else {
-  //     toast({
-  //       title: `Erro ${response.status}`,
-  //       description: `Erro ao enviar`,
-  //       status: 'error',
-  //       position: 'bottom',
-  //       variant: 'subtle',
-  //       duration: 5000,
-  //       isClosable: true,
-  //     })
-  //   }
-  // }
+  const messageServer = (response) => {
+    if (response) {
+      toast({
+        // title: 'Sucesso',
+        description: `Dados enviados!`,
+        status: 'success',
+        position: 'bottom',
+        variant: 'subtle',
+        duration: 5000,
+        isClosable: true,
+      })
+    } else {
+      toast({
+        title: `Erro`,
+        description: `Erro ao enviar`,
+        status: 'error',
+        position: 'bottom',
+        variant: 'subtle',
+        duration: 5000,
+        isClosable: true,
+      })
+    }
+  }
 
   const subscribeSchema = Yup.object().shape({
     name:
@@ -82,8 +83,16 @@ const SubscribeModal = (props) => {
 
       onSubmit={async (values) => {
         await newSubscription(values)
-          .then(() => console.log('Enviado'))
-          .catch(e => console.log('Erro: ', e))
+          .then(() => {
+            // message server
+            messageServer(true)
+            onClose()
+          })
+          .catch(e => {
+            // message server
+            messageServer(false)
+            console.log('Erro: ', e)
+          })
       }}
     >
       {({ isSubmitting, errors, handleChange }) => (
