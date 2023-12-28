@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react"
 import { LuTrash2 } from "react-icons/lu";
 import { AuthContext } from "../contexts/AuthContext"
 import { Navigate } from "react-router-dom"
-import { getAll } from "../firebase/controllers/subscriptionController"
+import { deleteSubscription, getAll } from "../firebase/controllers/subscriptionController"
 import DeleteModal from "../components/DeleteModal";
 
 const Admin = () => {
@@ -76,7 +76,8 @@ const Admin = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {
+              {subscriptions.length !== 0 &&
+
                 subscriptions.map((sub, index) => (
                   <Tr key={index} _hover={{ backgroundColor: 'gray.200' }}>
                     <Td>{sub.name}</Td>
@@ -88,7 +89,7 @@ const Admin = () => {
                     <Td>{sub.payment}</Td>
                     <Td textAlign='end'>
                       <Flex gap={2} justify='end'>
-                        <DeleteModal placeholder={"Deletar inscrição de: " + sub.name} onDeleteItem={() => console.log('delete ', sub.name)}>
+                        <DeleteModal placeholder={"Deletar inscrição de: " + sub.name} onDeleteItem={() => deleteSubscription(sub)}>
                           <Icon as={LuTrash2} cursor='pointer' color='red.600' boxSize={5} />
                         </DeleteModal>
                       </Flex>

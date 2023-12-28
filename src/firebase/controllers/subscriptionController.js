@@ -23,7 +23,8 @@ export const getAll = async () => {
     }
 
   } catch (error) {
-    return error
+    console.log('Erro geAll: ', error)
+    return []
   }
 }
 
