@@ -5,7 +5,7 @@ import App from './App.jsx'
 import './index.css'
 import theme from './utils/theme.js'
 import Home from './routes/Home.jsx'
-import Admin from './routes/Admin.jsx'
+import Admin from './routes/admin/Admin.jsx'
 import Login from './routes/Login.jsx'
 import ErrorPage from './routes/ErrorPage.jsx'
 

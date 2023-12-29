@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react"
 import { Button, Flex, Icon, Switch, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
 import { LuTrash2 } from "react-icons/lu";
-import { AuthContext } from "../contexts/AuthContext"
 import { Navigate } from "react-router-dom"
-import { deleteSubscription, getAll, paidSubscription } from "../firebase/controllers/subscriptionController"
-import DeleteModal from "../components/DeleteModal";
+import { AuthContext } from "../../contexts/AuthContext";
+import DeleteModal from "../../components/DeleteModal";
+import { deleteSubscription, getAll, paidSubscription } from "../../firebase/controllers/subscriptionController";
 
 const Admin = () => {
 
