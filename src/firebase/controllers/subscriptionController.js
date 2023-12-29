@@ -1,4 +1,4 @@
-import { collection, addDoc, getDocs, query, orderBy, deleteDoc, doc } from "firebase/firestore";
+import { collection, addDoc, getDocs, query, orderBy, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 export const getAll = async () => {
@@ -39,7 +39,8 @@ export const newSubscription = async (values) => {
       church,
       ground,
       transport,
-      payment
+      payment,
+      paid: false
     });
     console.log("Document written with ID: ", docRef.id);
   } catch (e) {
@@ -58,4 +59,14 @@ export const deleteSubscription = async (values) => {
       console.log('error delete. ', e)
       return false
     })
+}
+
+export const paidSubscription = async (values) => {
+  const { id, paid } = values
+
+  const subscriptionsRef = doc(db, "subscriptions", `${id}`);
+
+  await updateDoc(subscriptionsRef, {
+    paid: paid ? false : true
+  });
 }
