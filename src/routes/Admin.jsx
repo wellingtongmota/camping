@@ -44,7 +44,7 @@ const Admin = () => {
       <Flex
         flexDirection='column'
         w='full'
-        maxW='9xl'
+        maxW='7xl'
         align='center'
       >
 
@@ -56,7 +56,7 @@ const Admin = () => {
           Atualizar
         </Button>
 
-        <TableContainer mt={8} bg='white'>
+        <TableContainer mt={8} w='full' bg='white'>
           <Table variant='simple' size='sm'>
             {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
             <Thead>

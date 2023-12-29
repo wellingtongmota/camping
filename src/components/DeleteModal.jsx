@@ -42,7 +42,10 @@ const DeleteModal = ({ children, placeholder = "Deletar", onDeleteItem }) => {
               <Button ref={cancelRef} onClick={onClose}>
                 Cancelar
               </Button>
-              <Button colorScheme='red' ml={3} onClick={deleteItem}>
+              <Button
+                colorScheme='red'
+                ml={3}
+                onClick={() => {deleteItem(); onClose()}}>
                 Deletar
               </Button>
             </AlertDialogFooter>

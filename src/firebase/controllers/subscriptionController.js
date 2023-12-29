@@ -16,7 +16,7 @@ export const getAll = async () => {
     if (querySnapshot.empty)
       throw {
         title: 'Erro',
-        description: 'Inscrição não encontrada.'
+        description: 'Não há inscrições.'
       }
     else {
       return data
