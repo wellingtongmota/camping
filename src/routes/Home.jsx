@@ -3,6 +3,7 @@ import NextEvent from "../components/NextEvent"
 import Navbar from "../components/navbar/Navbar"
 import Footer from "../components/footer/Footer"
 import Activities from "../components/Activities"
+import Leisure from "../components/Leisure"
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       <Flex flexDirection='column' w='full' align='center' gap={4} flex={1}>
         <NextEvent maxW='4xl' px={2} />
         <Activities maxW='5xl' px={2} />
+        <Leisure maxW='5xl' px={2} />
       </Flex>
 
       <Footer />
