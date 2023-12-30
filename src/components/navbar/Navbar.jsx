@@ -32,7 +32,7 @@ const Navbar = () => {
         <Heading>Camping</Heading>
       </Flex>
 
-      <Flex gap={4} align='center'>
+      <Flex gap={[2, 4, 4]} align='center'>
         <Link href='https://www.instagram.com/atitudepinda' isExternal ><Icon as={LuInstagram} boxSize={8} color='whiteAlpha.700' /></Link>
         <Link href='https://www.facebook.com/atitudepinda' isExternal ><Icon as={LuFacebook} boxSize={8} color='whiteAlpha.700' /></Link>
 
@@ -45,7 +45,7 @@ const Navbar = () => {
               variant='link'
               color='whiteAlpha.700'
               fontSize='3xl'
-              ml={4}
+              ml={[0, 4, 4]}
               _active={{ color: 'whiteAlpha.800' }}
             />
             :

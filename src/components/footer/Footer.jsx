@@ -18,7 +18,9 @@ const Footer = () => {
         color='whiteAlpha.900'
         textTransform='uppercase'
         justify='center'
+        align='center'
         flex={1}
+        textAlign='center'
       >
         <Heading fontSize='3xl'>Atitude Jovem</Heading>
         <Heading fontSize='xl'>Pindamonhangaba</Heading>

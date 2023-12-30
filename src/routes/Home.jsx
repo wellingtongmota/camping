@@ -1,5 +1,7 @@
 import { Flex } from "@chakra-ui/react"
 import NextEvent from "../components/NextEvent"
+import Navbar from "../components/navbar/Navbar"
+import Footer from "../components/footer/Footer"
 
 const Home = () => {
   return (
@@ -7,9 +9,15 @@ const Home = () => {
       flexDirection='column'
       align='center'
       w='full'
-      p={2}
+      gap={2}
     >
-      <NextEvent maxW='4xl' />
+      <Navbar />
+
+      <Flex flexDirection='column' flex={1}>
+        <NextEvent maxW='4xl' px={2} />
+      </Flex>
+
+      <Footer />
     </Flex>
   )
 }
