@@ -1,8 +1,7 @@
-import { Avatar, Flex, Icon, IconButton, Image, Link, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
+import { Avatar, Flex, Heading, Icon, IconButton, Image, Link, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 import { NavLink as RouterLink } from 'react-router-dom'
 import { LuFacebook, LuInstagram, LuLayoutDashboard, LuLogIn, LuLogOut, LuMenu } from "react-icons/lu";
 import logo from '/logo.png'
-import NavLink from './NavLink'
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 
@@ -13,7 +12,7 @@ const Navbar = () => {
   return (
     <Flex
       w='full'
-      h='4.5rem'
+      h='4.4rem'
       bg='teal.900'
       textColor='whiteAlpha.900'
       boxShadow='md'
@@ -22,19 +21,15 @@ const Navbar = () => {
       px={[2, 4, 6]}
       py={2}
       gap={2}
-      // textTransform='uppercase'
     >
-      <Flex gap={4} align='center'>
-        <Link as={RouterLink} to='/camping-fonte'>
-          <Image
-            boxSize='3.2rem'
-            objectFit='cover'
-            src={logo}
-            alt='Logo do site'
-          />
-        </Link>
-
-        <NavLink to='/camping-fonte'>Camping</NavLink>
+      <Flex as={RouterLink} to='/camping-fonte' gap={4} align='center'>
+        <Image
+          boxSize='3.2rem'
+          objectFit='cover'
+          src={logo}
+          alt='Logo do site'
+        />
+        <Heading>Camping</Heading>
       </Flex>
 
       <Flex gap={4} align='center'>
