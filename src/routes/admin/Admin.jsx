@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react"
 import { Button, Flex, Icon, Switch, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
-import { LuTrash2 } from "react-icons/lu";
 import { Navigate } from "react-router-dom"
+import { LuTrash2, LuRotateCw } from "react-icons/lu";
 import { AuthContext } from "../../contexts/AuthContext";
-import DeleteModal from "../../components/DeleteModal";
 import { deleteSubscription, getAll, paidSubscription } from "../../firebase/controllers/subscriptionController";
+import DeleteModal from "../../components/DeleteModal";
 
 const Admin = () => {
 
@@ -17,7 +17,7 @@ const Admin = () => {
         setSubscriptions(data)
       })
       .catch(e => console.log('Erro: ', e))
-  }, [])
+  })
 
   if (!authenticated) {
     return (
@@ -45,17 +45,22 @@ const Admin = () => {
         w='full'
         maxW='7xl'
         align='center'
+        gap={4}
       >
 
-        <Button
-          colorScheme='teal'
-          loadingText='Atualizando'
-          onClick={getSubscriptions}
-        >
-          Atualizar
-        </Button>
+        <Flex w='full' mt={8}>
+          <Button
+            colorScheme='teal'
+            loadingText='Atualizando'
+            rightIcon={<LuRotateCw />}
+            boxShadow='md'
+            onClick={getSubscriptions}
+          >
+            Atualizar
+          </Button>
+        </Flex>
 
-        <TableContainer mt={8} w='full' boxShadow='base'>
+        <TableContainer w='full' boxShadow='base'>
           <Table variant='simple' size='sm'>
             {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
             <Thead>
@@ -75,7 +80,7 @@ const Admin = () => {
               {subscriptions.length !== 0 &&
 
                 subscriptions.map(sub => (
-                  <Tr key={sub.id} _hover={{ backgroundColor: 'gray.200' }} bg='gray.50'>
+                  <Tr key={sub.id} _hover={{ backgroundColor: 'gray.200' }} bg={sub.paid && 'gray.50'}>
                     <Td>{sub.name}</Td>
                     <Td>{sub.email}</Td>
                     <Td>{sub.phone}</Td>
