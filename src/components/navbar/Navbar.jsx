@@ -29,7 +29,7 @@ const Navbar = () => {
           src={logo}
           alt='Logo do site'
         />
-        <Heading>Camping</Heading>
+        <Heading textTransform='uppercase'>Camping</Heading>
       </Flex>
 
       <Flex gap={[2, 4, 4]} align='center'>
