@@ -22,7 +22,7 @@ const Navbar = () => {
       py={2}
       gap={2}
     >
-      <Flex as={RouterLink} to='/camping-fonte' gap={4} align='center'>
+      <Flex as={RouterLink} to='/camping' gap={4} align='center'>
         <Image
           boxSize='3.2rem'
           objectFit='cover'
@@ -53,16 +53,16 @@ const Navbar = () => {
           }
           {!authenticated ?
             <MenuList color='gray.700'>
-              <MenuItem icon={<LuLogIn />} onClick={signIn} as={RouterLink} to='/camping-fonte/login'>
+              <MenuItem icon={<LuLogIn />} onClick={signIn} as={RouterLink} to='/camping/login'>
                 Entrar
               </MenuItem>
             </MenuList>
             :
             <MenuList color='gray.700'>
-              <MenuItem icon={<LuLayoutDashboard />} as={RouterLink} to='/camping-fonte/admin'>
+              <MenuItem icon={<LuLayoutDashboard />} as={RouterLink} to='/camping/admin'>
                 Admin
               </MenuItem>
-              <MenuItem icon={<LuLogOut />} onClick={signOut} as={RouterLink} to='/camping-fonte'>
+              <MenuItem icon={<LuLogOut />} onClick={signOut} as={RouterLink} to='/camping'>
                 Sair
               </MenuItem>
             </MenuList>

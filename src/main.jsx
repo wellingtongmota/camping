@@ -11,13 +11,13 @@ import ErrorPage from './routes/ErrorPage.jsx'
 
 const router = createBrowserRouter([
   {
-    path: '/camping-fonte',
+    path: '/camping',
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
-      { path: '/camping-fonte', element: <Home /> },
-      { path: '/camping-fonte/admin', element: <Admin /> },
-      { path: '/camping-fonte/login', element: <Login /> },
+      { path: '/camping', element: <Home /> },
+      { path: '/camping/admin', element: <Admin /> },
+      { path: '/camping/login', element: <Login /> },
     ]
   }
 ])

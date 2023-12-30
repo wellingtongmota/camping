@@ -22,7 +22,7 @@ const Admin = () => {
 
   if (!authenticated) {
     return (
-      <Navigate to='/camping-fonte/login' />
+      <Navigate to='/camping/login' />
     )
   }
 

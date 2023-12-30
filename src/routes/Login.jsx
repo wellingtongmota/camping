@@ -34,7 +34,7 @@ const Login = () => {
 
   if (authenticated) {
     return (
-      <Navigate to='/camping-fonte/admin' />
+      <Navigate to='/camping/admin' />
     )
   }
 

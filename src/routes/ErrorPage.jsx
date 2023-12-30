@@ -11,7 +11,7 @@ const ErrorPage = () => {
           Certifique-se que digitou o endereço corretamente ou seguiu um link válido.
         </Text>
 
-        <Button as={Link} to='/camping-fonte' colorScheme='teal' borderRadius='none' mt={12} textTransform='uppercase' size='lg'>Acessar home</Button>
+        <Button as={Link} to='/camping' colorScheme='teal' borderRadius='none' mt={12} textTransform='uppercase' size='lg'>Acessar home</Button>
       </Flex>
 
       <Box boxSize={['sm', 'lg', 'xl']}>
