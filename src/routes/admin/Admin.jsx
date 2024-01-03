@@ -1,12 +1,16 @@
 import { useContext, useEffect, useState } from "react"
-import { Button, Flex, Icon, Switch, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
+import { Button, Flex, Switch, TableContainer } from "@chakra-ui/react"
 import { Navigate } from "react-router-dom"
-import { LuTrash2, LuRotateCw } from "react-icons/lu";
+import { LuRotateCw } from "react-icons/lu";
 import { AuthContext } from "../../contexts/AuthContext";
-import { deleteSubscription, getAll, paidSubscription } from "../../firebase/controllers/subscriptionController";
-import DeleteModal from "../../components/DeleteModal";
+import {
+  // deleteSubscription,
+  getAll,
+  paidSubscription
+} from "../../firebase/controllers/subscriptionController";
 import Navbar from "../../components/navbar/Navbar";
 import { DataTable } from "../../components/DataTable";
+// import DeleteModal from "../../components/DeleteModal";
 
 const Admin = () => {
 
@@ -78,7 +82,10 @@ const Admin = () => {
     },
     {
       accessorKey: "paid",
-      cell: (info) => info.getValue(),
+      cell: (props) => <Switch colorScheme='teal' size='sm' isChecked={props.getValue()} onChange={() => {
+        paidSubscription(props.row.original);
+        getSubscriptions()
+      }} />,
       header: "Pago"
     },
   ]
