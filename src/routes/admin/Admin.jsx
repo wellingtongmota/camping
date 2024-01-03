@@ -39,8 +39,6 @@ const Admin = () => {
       .catch(e => console.log('Erro: ', e))
   }
 
-  // const columnHelper = createColumnHelper()
-
   const columns = [
     {
       accessorKey: "name",
@@ -121,47 +119,6 @@ const Admin = () => {
           <DataTable columns={columns} data={subscriptions} />
         </TableContainer>
 
-        {/* <TableContainer w='full' boxShadow='base'>
-          <Table variant='simple' size='sm'>
-            <Thead>
-              <Tr>
-                <Th>Nome</Th>
-                <Th>E-mail</Th>
-                <Th>Celular</Th>
-                <Th>Igreja</Th>
-                <Th>Cama / Barraca</Th>
-                <Th>Transporte</Th>
-                <Th>Met. pagamento</Th>
-                <Th>Pago</Th>
-                <Th isNumeric pl={4}>Ações</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {subscriptions.length !== 0 &&
-
-                subscriptions.map(sub => (
-                  <Tr key={sub.id} _hover={{ backgroundColor: 'gray.200' }} bg={sub.paid && 'gray.50'}>
-                    <Td>{sub.name}</Td>
-                    <Td>{sub.email}</Td>
-                    <Td>{sub.phone}</Td>
-                    <Td>{sub.church}</Td>
-                    <Td>{sub.ground}</Td>
-                    <Td>{sub.transport}</Td>
-                    <Td>{sub.payment}</Td>
-                    <Td><Switch colorScheme='teal' size='sm' isChecked={sub.paid} onChange={() => paidSubscription(sub)} /></Td>
-                    <Td textAlign='end'>
-                      <Flex gap={2} justify='end'>
-                        <DeleteModal placeholder={"Deletar inscrição de: " + sub.name} onDeleteItem={() => deleteSubscription(sub)}>
-                          <Icon as={LuTrash2} cursor='pointer' color='red.600' boxSize={5} />
-                        </DeleteModal>
-                      </Flex>
-                    </Td>
-                  </Tr>
-                ))
-              }
-            </Tbody>
-          </Table>
-        </TableContainer> */}
       </Flex>
     </Flex>
   )
