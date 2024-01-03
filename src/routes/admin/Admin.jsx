@@ -6,6 +6,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { deleteSubscription, getAll, paidSubscription } from "../../firebase/controllers/subscriptionController";
 import DeleteModal from "../../components/DeleteModal";
 import Navbar from "../../components/navbar/Navbar";
+import { DataTable } from "../../components/DataTable";
 
 const Admin = () => {
 
@@ -109,8 +110,8 @@ const Admin = () => {
           </Button>
         </Flex>
 
-        <TableContainer>
-          <Table columns={columns} data={subscriptions} />
+        <TableContainer w='full' boxShadow='base'>
+          <DataTable columns={columns} data={subscriptions} />
         </TableContainer>
 
         {/* <TableContainer w='full' boxShadow='base'>
