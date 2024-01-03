@@ -110,7 +110,7 @@ const Admin = () => {
       <Flex
         flexDirection='column'
         w='full'
-        maxW='7xl'
+        maxW='8xl'
         align='center'
         gap={4}
         px={2}
