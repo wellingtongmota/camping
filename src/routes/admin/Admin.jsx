@@ -18,7 +18,7 @@ const Admin = () => {
         setSubscriptions(data)
       })
       .catch(e => console.log('Erro: ', e))
-  })
+  }, [])
 
   if (!authenticated) {
     return (
@@ -33,6 +33,54 @@ const Admin = () => {
       })
       .catch(e => console.log('Erro: ', e))
   }
+
+  // const columnHelper = createColumnHelper()
+
+  const columns = [
+    {
+      accessorKey: "name",
+      cell: (info) => info.getValue(),
+      header: "Nome"
+    },
+
+    {
+      accessorKey: "email",
+      cell: (info) => info.getValue(),
+      header: "E-mail"
+    },
+
+    {
+      accessorKey: "phone",
+      cell: (info) => info.getValue(),
+      header: "Celular"
+    },
+
+    {
+      accessorKey: "church",
+      cell: (info) => info.getValue(),
+      header: "Igreja"
+    },
+    {
+      accessorKey: "ground",
+      cell: (info) => info.getValue(),
+      header: "Cama / Barraca"
+    },
+    {
+      accessorKey: "transport",
+      cell: (info) => info.getValue(),
+      header: "Transporte"
+    },
+    {
+      accessorKey: "payment",
+      cell: (info) => info.getValue(),
+      header: "Igreja"
+    },
+    {
+      accessorKey: "paid",
+      cell: (info) => info.getValue(),
+      header: "Pago"
+    },
+  ]
 
   return (
     <Flex
@@ -61,9 +109,12 @@ const Admin = () => {
           </Button>
         </Flex>
 
-        <TableContainer w='full' boxShadow='base'>
+        <TableContainer>
+          <Table columns={columns} data={subscriptions} />
+        </TableContainer>
+
+        {/* <TableContainer w='full' boxShadow='base'>
           <Table variant='simple' size='sm'>
-            {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
             <Thead>
               <Tr>
                 <Th>Nome</Th>
@@ -102,7 +153,7 @@ const Admin = () => {
               }
             </Tbody>
           </Table>
-        </TableContainer>
+        </TableContainer> */}
       </Flex>
     </Flex>
   )
