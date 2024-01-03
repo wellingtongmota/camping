@@ -1,16 +1,16 @@
 import { useContext, useEffect, useState } from "react"
-import { Button, Flex, Switch, TableContainer } from "@chakra-ui/react"
+import { Button, Flex, Icon, Switch, TableContainer } from "@chakra-ui/react"
 import { Navigate } from "react-router-dom"
-import { LuRotateCw } from "react-icons/lu";
+import { LuRotateCw, LuTrash2 } from "react-icons/lu";
 import { AuthContext } from "../../contexts/AuthContext";
 import {
-  // deleteSubscription,
+  deleteSubscription,
   getAll,
   paidSubscription
 } from "../../firebase/controllers/subscriptionController";
 import Navbar from "../../components/navbar/Navbar";
 import { DataTable } from "../../components/DataTable";
-// import DeleteModal from "../../components/DeleteModal";
+import DeleteModal from "../../components/DeleteModal";
 
 const Admin = () => {
 
@@ -24,12 +24,6 @@ const Admin = () => {
       })
       .catch(e => console.log('Erro: ', e))
   }, [])
-
-  if (!authenticated) {
-    return (
-      <Navigate to='/camping/login' />
-    )
-  }
 
   const getSubscriptions = async () => {
     await getAll()
@@ -76,17 +70,34 @@ const Admin = () => {
     {
       accessorKey: "payment",
       cell: (info) => info.getValue(),
-      header: "Igreja"
+      header: "Mét. Pagamento"
     },
     {
       accessorKey: "paid",
-      cell: (props) => <Switch colorScheme='teal' size='sm' isChecked={props.getValue()} onChange={() => {
-        paidSubscription(props.row.original);
-        getSubscriptions()
-      }} />,
-      header: "Pago"
+      cell: (props) =>
+        <Switch colorScheme='teal' size='sm' isChecked={props.getValue()} onChange={() => {
+          paidSubscription(props.row.original);
+          getSubscriptions()
+        }} />,
+      header: "Pago",
     },
+    {
+      header: "Ações",
+      cell: (props) =>
+        <DeleteModal placeholder={"Deletar inscrição de: " + props.row.original.name} onDeleteItem={() => {
+          deleteSubscription(props.row.original);
+          getSubscriptions()
+        }}>
+          <Icon as={LuTrash2} cursor='pointer' color='red.600' boxSize={5} />
+        </DeleteModal>
+    }
   ]
+
+  if (!authenticated) {
+    return (
+      <Navigate to='/camping/login' />
+    )
+  }
 
   return (
     <Flex
@@ -95,12 +106,14 @@ const Admin = () => {
       align='center'
     >
       <Navbar />
+
       <Flex
         flexDirection='column'
         w='full'
         maxW='7xl'
         align='center'
         gap={4}
+        px={2}
       >
 
         <Flex w='full' mt={8}>
@@ -118,8 +131,8 @@ const Admin = () => {
         <TableContainer w='full' boxShadow='base'>
           <DataTable columns={columns} data={subscriptions} />
         </TableContainer>
-
       </Flex>
+
     </Flex>
   )
 }
